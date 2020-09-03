@@ -1,37 +1,45 @@
 #include <iostream>
-#include <algorithm>
+#include <cassert>
+#include <vector>
+typedef long long LL;
 
-using namespace std;
+using std::vector;
 
-int main()
-{
-    int i,n,s,flag=0;
-    cout<<"Enter size of array: ";
-    cin>>n;
-    int *a = new int[n];
-    cout<<"Enter elements:"<<endl;
-    for(i=0;i<n;i++)
-        cin>>a[i];
-    cout<<"Enter element to search: ";
-    cin>>s;
-    int no=sizeof(a)/sizeof(a[0]);
-    sort(a,a+no);
-    int li=0,ui=n-1,mid;
-    while(li<=ui){
-        mid=li+(ui-1)/2;
-        if(a[mid]==s){
-            flag=1;break;
-        }
-        else if(a[mid]>s){
-            ui=mid-1;
-        }
-        else
-            li=mid+1;
-        cout<<".";
-    }
-    if(!flag)
-        cout<<"element not found"<<endl;
-    else
-        cout<<s<<" was found at "<<mid+1<<"of sorted array"<<endl;
-    return 0;
+int binary_search(const vector<LL> &a, LL x) {
+  LL left = 0, right = (int)a.size(); 
+  //write your code here
+  while(right>=left){
+      LL mid=left+(right-left)/2;
+      if(x<a[mid])  right=mid-1;
+      else if(x>a[mid]) left=mid+1;
+      else return mid;
+  }
+  return -1;
+}
+
+int linear_search(const vector<LL> &a, LL x) {
+  for (LL i = 0; i < a.size(); ++i) {
+    if (a[i] == x) return i;
+  }
+  return -1;
+}
+
+int main() {
+  LL n;
+  std::cin >> n;
+  vector<LL> a(n);
+  for (LL i = 0; i < a.size(); i++) {
+    std::cin >> a[i];
+  }
+  LL m;
+  std::cin >> m;
+  vector<LL> b(m);
+  for (LL i = 0; i < m; ++i) {
+    std::cin >> b[i];
+  }
+  for (LL i = 0; i < m; ++i) {
+    //replace with the call to binary_search when implemented
+    //std::cout << linear_search(a, b[i]) << ' ';
+    std::cout << binary_search(a, b[i]) << ' ';
+  }
 }
