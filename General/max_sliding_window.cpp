@@ -1,3 +1,16 @@
+/*
+Problem Introduction
+Given a sequence 𝑎1, . . . , 𝑎𝑛 of integers and an integer 𝑚 ≤ 𝑛, find the maximum among {𝑎𝑖, . . . , 𝑎𝑖+𝑚−1} for
+every 1 ≤ 𝑖 ≤ 𝑛 − 𝑚 + 1. A naive 𝑂(𝑛𝑚) algorithm for solving this problem scans each window separately.
+Your goal is to design an 𝑂(𝑛) algorithm.
+
+Input Format. The first line contains an integer 𝑛, the second line contains 𝑛 integers 𝑎1, . . . , 𝑎𝑛 separated
+by spaces, the third line contains an integer 𝑚.
+
+Constraints. 1 ≤ 𝑛 ≤ 105, 1 ≤ 𝑚 ≤ 𝑛, 0 ≤ 𝑎𝑖 ≤ 105 for all 1 ≤ 𝑖 ≤ 𝑛.
+
+Output Format. Output max{𝑎𝑖, . . . , 𝑎𝑖+𝑚−1} for every 1 ≤ 𝑖 ≤ 𝑛 − 𝑚 + 1
+*/
 #include <iostream>
 #include <vector>
 #include <algorithm>
