@@ -3,7 +3,7 @@ Sum of cousins of a given node in a Binary Tree
 Difficulty Level : Medium
 Given a binary tree and data value of a node. The task is to find the sum of cousin nodes of given node. If given node has no cousins then return -1.
 Note: It is given that all nodes have distinct values and the given node exists in the tree.
-Examples: 
+Examples:
 Input:
                 1
               /  \
@@ -30,8 +30,10 @@ No cousin nodes of node having value 7.
 */
 #include <iostream>
 #include <vector>
-#include <deque>
+#include <queue>
+#include <chrono>
 using namespace std;
+using namespace std::chrono;
 
 struct Node{
   int data;
@@ -50,7 +52,7 @@ class BT{
         temp->left = temp->right = NULL;
         root=temp;
     }
-    Node *insert(Node * rt,int t, int i){
+    Node *insert(Node * rt,int t){
         if(rt==NULL){
             Node *temp = new Node();
             temp->data=t;
@@ -58,58 +60,59 @@ class BT{
             rt=temp;
             return rt;
         }
-        else if(i%2==0) rt->right = insert(rt->right,t,i/2);
-        else rt->left = insert(rt->left,t,i/2);
     }
 
     long sumCousin(int key){
-        long sum=0,level=0;
-        int found=0,rsib;
-        std::vector<Node*> d1,d2,sib;
-        d1.push_back(root);
+        if(!root || root->data==key)    return -1;
+        long sum=0;
+        int found=0;
+        std::queue<Node*> d1;
+        d1.push(root);
         while(d1.size()>0){
-            for(int i=0;i<d1.size();i++){
-                if(d1[i]->data==key){
+            if(found) return sum;
+            sum=0;
+            int sz = d1.size();
+            while(sz--){
+                Node *rt = d1.front();
+                d1.pop();
+
+                if((rt->left && rt->left->data==key) || (rt->right && rt->right->data==key))
                     found=1;
-                    break;
+                else{
+                    if(rt->left){
+                        sum+=rt->left->data;
+                        d1.push(rt->left);
+                    }
+                    if(rt->right){
+                        sum+=rt->right->data;
+                        d1.push(rt->right);
+                    }
                 }
-                if(d1[i]->left!=NULL){
-                    d2.push_back(d1[i]->left);
-                    if(d1[i]->left->data==key)  rsib=d1[i]->right->data;
-                }
-                if(d1[i]->right!=NULL){
-                    d2.push_back(d1[i]->right);
-                    if(d1[i]->right->data==key)  rsib=d1[i]->left->data;
-                }
-            }
-            if(found==1){
-                sib=d1;
-                break;
-            }
-            d1.clear();
-            d1=d2;
-            d2.clear();
-        }
-        for(int i=0;i<sib.size();i++){
-            if(sib[i]->data!=key){
-                sum+=sib[i]->data;
             }
         }
-        return sum-rsib;
     }
 };
 
 int main() {
     BT tree(1);
-    tree.root->left = tree.insert(tree.root->left,2,0);
-    tree.root->right = tree.insert(tree.root->right,3,0);
-    tree.root->left->left = tree.insert(tree.root->left->left,4,0);
-    tree.root->left->right = tree.insert(tree.root->left->right,5,0);
-    tree.root->right->left = tree.insert(tree.root->right->left,6,0);
+    tree.root->left = tree.insert(tree.root->left,3);
+    tree.root->right = tree.insert(tree.root->right,7);
+    tree.root->left->left = tree.insert(tree.root->left->left,6);
+    tree.root->left->right = tree.insert(tree.root->left->right,5);
+    tree.root->left->right->left = tree.insert(tree.root->left->right->left,10);
+    tree.root->right->left = tree.insert(tree.root->right->left,4);
+    tree.root->right->right = tree.insert(tree.root->right->right,13);
+    tree.root->right->left->left = tree.insert(tree.root->right->left->left,17);
+    tree.root->right->left->right = tree.insert(tree.root->right->left->right,15);
     /*cout<<tree.root->data<<endl;
     cout<<tree.root->left->data<<endl;
     cout<<tree.root->right->data<<endl;
     cout<<tree.root->left->left->data<<endl;
     cout<<tree.root->left->right->data<<endl;*/
-    cout<<tree.sumCousin(5);
+    cout<<".";
+    auto start = high_resolution_clock::now();
+    cout<<tree.sumCousin(13)<<endl;
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<microseconds>(stop - start);
+    cout << duration.count() << endl;
 }
