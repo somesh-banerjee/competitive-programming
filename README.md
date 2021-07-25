@@ -12,3 +12,4 @@
 |[Count minimum number of fountains to be activated to cover the entire garden](./Codenation/2.cpp)|
 |[Represent a number as the sum of positive numbers ending with 9](./Codenation/3.cpp)|
 |[Remove K Digits to make smallest number](./Codenation/4.cpp)|
+|[Backspace String Compare](./Codenation/5.cpp)|
