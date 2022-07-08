@@ -31,12 +31,12 @@ void solve(int ttt) {
 	}
 
 	vector<ll> dp(n + 1, 0); // height i <= n
-	// dp[i] - the max total beauty so far if the last flower taken has height i
+	// dp[i] - the max total beauty so far if the last flower of the remaining flowers has height i
 	ll ans = INT_MIN;
 	for (ll i = 0; i < n; ++i)
 	{
 
-        // linearly finding best; 
+        // iterating over height from 0 to h[i] to find max value  
 		// for (ll j = 0; j < h[i]; j++) {
 		// 	dp[h[i]] = max(dp[h[i]], dp[j] + a[i]);
 		// }
@@ -45,6 +45,7 @@ void solve(int ttt) {
         // So to optimize we will find the best for dp[h[i]] using segment tree
         // then the time complx. will be O(nlogn)
 
+		// implementing the segment tree to perform the above in O(logn)
 		ll x = h[i] + base;
 		// max dp[j] for j in [0,h[i]-1]
 		ll best = 0;
@@ -62,6 +63,8 @@ void solve(int ttt) {
 		}
 
 	}
+
+	// Iterating over all dp values to find the maximum
 	for (ll i = 0; i <= n; ++i)
 	{
 		ans = max(ans, dp[i]);
