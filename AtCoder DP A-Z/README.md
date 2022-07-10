@@ -14,6 +14,12 @@ Here are the solutions to most of the problems of the DP contest
 | [O - Matching](https://atcoder.jp/contests/dp/tasks/dp_o) | Bitmasking | [cpp](./o.cpp) |
 | [P - Independent Set](https://atcoder.jp/contests/dp/tasks/dp_p) | DP on trees | [cpp](./p.cpp) |
 | [Q - Flowers](https://atcoder.jp/contests/dp/tasks/dp_q) | Optimization with Segment tree | [cpp](./q.cpp) |
-| []() |  | [cpp]() |
-| []() |  | [cpp]() |
-| []() |  | [cpp]() |
+| [R - Walk](https://atcoder.jp/contests/dp/tasks/dp_r) | DP on Graphs | [cpp](./r.cpp) |
+| [S - Digit Sum](https://atcoder.jp/contests/dp/tasks/dp_s) |  | [cpp](./s.cpp) |
+| []() |  | [cpp](./t.cpp) |
+| [U - Grouping ](https://atcoder.jp/contests/dp/tasks/dp_u) | Bitmasking, Subsets | [cpp](./u.cpp) |
+| []() |  | [cpp](./v.cpp) |
+| []() |  | [cpp](./w.cpp) |
+| []() |  | [cpp](./x.cpp) |
+| []() |  | [cpp](./y.cpp) |
+| []() |  | [cpp](./z.cpp) |
